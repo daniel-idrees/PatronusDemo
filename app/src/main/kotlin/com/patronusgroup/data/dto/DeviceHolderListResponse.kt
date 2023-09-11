@@ -1,13 +1,18 @@
 package com.patronusgroup.data.dto
 
-import com.patronusgroup.domain.model.DeviceHolder
+import com.squareup.moshi.Json
 
 data class DeviceHolderListResponse(
-    val id: String? = null,
+    @field:Json(name = "customers")
+    val deviceHolders: List<DeviceHolderDto> = listOf(),
 )
 
-fun DeviceHolderListResponse.map(): List<DeviceHolder> {
-    val list = arrayListOf<DeviceHolder>()
-    // TODO implement mapping
-    return list
-}
+data class DeviceHolderDto(
+    val id: Int? = null,
+    val firstName: String? = null,
+    val lastName: String? = null,
+    val gender: String? = null,
+    val phoneNumber: String? = null,
+    val imageUrl: String? = null,
+    val stickers: List<String>? = null,
+)

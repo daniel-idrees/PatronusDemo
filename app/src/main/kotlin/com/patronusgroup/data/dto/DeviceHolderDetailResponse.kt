@@ -1,13 +1,26 @@
 package com.patronusgroup.data.dto
 
-import com.patronusgroup.domain.model.DeviceHolder
+import com.squareup.moshi.Json
 
 data class DeviceHolderDetailResponse(
-    val id: String? = null,
+    val id: Int? = null,
+    val imageUrl: String? = null,
+    @field:Json(name = "currentLatitude")
+    val latitude: Double? = null,
+    @field:Json(name = "currentLongitude")
+    val longitude: Double? = null,
+    val firstName: String? = null,
+    val lastName: String? = null,
+    val stickers: List<String>? = null,
+    val gender: String? = null,
+    val phoneNumber: String? = null,
+    val address: AddressDto? = null,
 )
 
-fun DeviceHolderDetailResponse.map(): DeviceHolder {
-    val deviceHolder = DeviceHolder(id)
-    // TODO implement mapping
-    return deviceHolder
-}
+data class AddressDto(
+    val street: String? = null,
+    val city: String? = null,
+    val state: String? = null,
+    val zip: String? = null,
+    val country: String? = null,
+)
