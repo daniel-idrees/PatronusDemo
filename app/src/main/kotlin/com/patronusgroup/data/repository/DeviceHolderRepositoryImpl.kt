@@ -1,25 +1,25 @@
 package com.patronusgroup.data.repository
 
+import com.patronusgroup.data.dto.map
 import com.patronusgroup.data.network.DeviceHolderService
+import com.patronusgroup.domain.model.DeviceHolder
 import com.patronusgroup.domain.repository.DeviceHolderRepository
 import javax.inject.Inject
 
 class DeviceHolderRepositoryImpl @Inject constructor(
     private val deviceHolderService: DeviceHolderService,
 ) : DeviceHolderRepository {
-    override suspend fun getDeviceHolderList() {
+    override suspend fun getDeviceHolderList(): List<DeviceHolder>? =
         runCatching {
-            val response = deviceHolderService.getDeviceHolderList()
+            deviceHolderService.getDeviceHolderList().map()
         }.onFailure {
             // TODO log
-        }
-    }
+        }.getOrNull()
 
-    override suspend fun getDeviceHolderDetail(id: String) {
+    override suspend fun getDeviceHolderDetail(id: String): DeviceHolder? =
         runCatching {
-            val response = deviceHolderService.getDeviceHolderDetail(id)
+            deviceHolderService.getDeviceHolderDetail(id).map()
         }.onFailure {
             // TODO log
-        }
-    }
+        }.getOrNull()
 }
