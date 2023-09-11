@@ -1,8 +1,10 @@
 package com.patronusgroup.data.repository
 
-import com.patronusgroup.data.dto.map
+import com.patronusgroup.data.dto.MapperHelper.toDeviceHolderDetail
+import com.patronusgroup.data.dto.MapperHelper.toDeviceHolderList
 import com.patronusgroup.data.network.DeviceHolderService
 import com.patronusgroup.domain.model.DeviceHolder
+import com.patronusgroup.domain.model.DeviceHolderDetail
 import com.patronusgroup.domain.repository.DeviceHolderRepository
 import javax.inject.Inject
 
@@ -11,14 +13,16 @@ class DeviceHolderRepositoryImpl @Inject constructor(
 ) : DeviceHolderRepository {
     override suspend fun getDeviceHolderList(): List<DeviceHolder>? =
         runCatching {
-            deviceHolderService.getDeviceHolderList().map()
+            val response = deviceHolderService.getDeviceHolderList().toDeviceHolderList()
+            response
         }.onFailure {
             // TODO log
         }.getOrNull()
 
-    override suspend fun getDeviceHolderDetail(id: String): DeviceHolder? =
+    override suspend fun getDeviceHolderDetail(id: String): DeviceHolderDetail? =
         runCatching {
-            deviceHolderService.getDeviceHolderDetail(id).map()
+            val response = deviceHolderService.getDeviceHolderDetail(id).toDeviceHolderDetail()
+            response
         }.onFailure {
             // TODO log
         }.getOrNull()
