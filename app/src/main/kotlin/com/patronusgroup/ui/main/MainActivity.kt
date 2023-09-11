@@ -1,4 +1,4 @@
-package com.patronusgroup
+package com.patronusgroup.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
