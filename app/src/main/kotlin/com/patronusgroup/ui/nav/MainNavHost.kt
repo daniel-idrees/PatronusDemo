@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -33,11 +34,13 @@ fun DeviceApp() {
 private fun MainNavHost(navController: NavHostController) {
     NavHost(navController = navController, startDestination = ListScreen.route) {
         toListScreen {
-            ListScreenView()
+            ListScreenView(
+                viewModel = hiltViewModel(),
+            ) { navController.navigate(DetailScreen.route) }
         }
 
         toDetailScreen {
-            DetailScreenView()
+            DetailScreenView(viewModel = hiltViewModel())
         }
     }
 }
