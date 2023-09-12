@@ -1,7 +1,7 @@
 package com.patronusgroup.data.repository
 
-import com.patronusgroup.data.dto.MapperHelper.toDeviceHolderDetail
-import com.patronusgroup.data.dto.MapperHelper.toDeviceHolderList
+import com.patronusgroup.data.dto.toDeviceHolderDetail
+import com.patronusgroup.data.dto.toDeviceHolderList
 import com.patronusgroup.data.network.DeviceHolderService
 import com.patronusgroup.domain.model.DeviceHolder
 import com.patronusgroup.domain.model.DeviceHolderDetail

@@ -1,5 +1,9 @@
 package com.patronusgroup.data.dto
 
+import com.patronusgroup.data.dto.DtoMapperHelper.getEnumOrNull
+import com.patronusgroup.data.dto.DtoMapperHelper.getStickerList
+import com.patronusgroup.domain.model.DeviceHolderDetail
+import com.patronusgroup.domain.model.enums.Gender
 import com.squareup.moshi.Json
 
 data class DeviceHolderDetailResponse(
@@ -17,10 +21,15 @@ data class DeviceHolderDetailResponse(
     val address: AddressDto? = null,
 )
 
-data class AddressDto(
-    val street: String? = null,
-    val city: String? = null,
-    val state: String? = null,
-    val zip: String? = null,
-    val country: String? = null,
-)
+fun DeviceHolderDetailResponse.toDeviceHolderDetail(): DeviceHolderDetail =
+    DeviceHolderDetail(
+        imageUrl = imageUrl,
+        latitude = latitude,
+        longitude = longitude,
+        fullName = DtoMapperHelper.getFullName(firstName, lastName),
+        stickers = getStickerList(stickers),
+        gender = gender.getEnumOrNull<Gender>(),
+        phoneNumber = phoneNumber,
+        addressStreetAndZip = DtoMapperHelper.getAddressStreetAndZip(address),
+        city = address?.city,
+    )
