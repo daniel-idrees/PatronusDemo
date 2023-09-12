@@ -58,4 +58,4 @@ private fun NavGraphBuilder.toDetailScreen(
     content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit,
 ) = composable(DetailScreen.route, content = content)
 
-private fun DetailScreen.routeTo(id: String) = "${this.route}/$id"
+private fun DetailScreen.routeTo(id: String) = this.route.replace("{$detailScreenArgumentIdKey}", id)
