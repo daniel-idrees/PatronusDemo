@@ -9,7 +9,10 @@ import com.patronusgroup.ui.screens.views.ErrorView
 import com.patronusgroup.ui.screens.views.LoadingView
 
 @Composable
-fun DetailScreenView(viewModel: DetailViewModel) {
+fun DetailScreenView(
+    viewModel: DetailViewModel,
+    id: String,
+) {
     val viewState by viewModel.detailUiState.collectAsStateWithLifecycle()
     when (viewState) {
         is DetailUiState.Loading -> LoadingView()

@@ -36,11 +36,16 @@ private fun MainNavHost(navController: NavHostController) {
         toListScreen {
             ListScreenView(
                 viewModel = hiltViewModel(),
-            ) { navController.navigate(DetailScreen.route) }
+            ) { id -> navController.navigate(DetailScreen.routeTo(id)) }
         }
 
-        toDetailScreen {
-            DetailScreenView(viewModel = hiltViewModel())
+        toDetailScreen { backStackEntry ->
+            val id = backStackEntry
+                .arguments?.getString(detailScreenArgumentIdKey) ?: return@toDetailScreen
+            DetailScreenView(
+                viewModel = hiltViewModel(),
+                id,
+            )
         }
     }
 }
@@ -52,3 +57,5 @@ private fun NavGraphBuilder.toListScreen(
 private fun NavGraphBuilder.toDetailScreen(
     content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit,
 ) = composable(DetailScreen.route, content = content)
+
+private fun DetailScreen.routeTo(id: String) = "${this.route}/$id"

@@ -9,7 +9,10 @@ import com.patronusgroup.ui.screens.views.ErrorView
 import com.patronusgroup.ui.screens.views.LoadingView
 
 @Composable
-fun ListScreenView(viewModel: ListViewModel, navigateToDetail: () -> Unit) {
+fun ListScreenView(
+    viewModel: ListViewModel,
+    navigateToDetail: (String) -> Unit,
+) {
     val viewState by viewModel.listUiState.collectAsStateWithLifecycle()
     when (viewState) {
         is ListUiState.Loading -> LoadingView()
@@ -19,5 +22,5 @@ fun ListScreenView(viewModel: ListViewModel, navigateToDetail: () -> Unit) {
 }
 
 @Composable
-private fun ListScreen(navigateToDetail: () -> Unit) {
+private fun ListScreen(navigateToDetail: (String) -> Unit) {
 }
