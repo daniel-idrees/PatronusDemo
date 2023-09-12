@@ -34,6 +34,20 @@ object DtoMapperHelper {
         } ?: return ""
     }
 
+    fun getFormattedPhoneNumber(countryCode: CountryCode, phoneNumber: String?): String {
+        return if (phoneNumber.isNullOrBlank()) {
+            ""
+        } else {
+            val code = countryCode.code
+            "$code $phoneNumber"
+        }
+    }
+
+    enum class CountryCode(val code: String) {
+        GERMANY("+49"),
+        USA("+1"),
+    }
+
     inline fun <reified T : Enum<T>> String?.getEnumOrNull(): T? =
         enumValues<T>().firstOrNull { it.name.equals(this, ignoreCase = true) }
 }
