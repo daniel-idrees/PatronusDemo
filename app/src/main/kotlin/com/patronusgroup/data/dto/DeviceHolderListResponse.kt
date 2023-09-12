@@ -1,6 +1,7 @@
 package com.patronusgroup.data.dto
 
 import com.patronusgroup.data.dto.DtoMapperHelper.getEnumOrNull
+import com.patronusgroup.data.dto.DtoMapperHelper.getFormattedPhoneNumber
 import com.patronusgroup.data.dto.DtoMapperHelper.getStickerList
 import com.patronusgroup.domain.model.DeviceHolder
 import com.patronusgroup.domain.model.enums.Gender
@@ -21,7 +22,7 @@ fun DeviceHolderListResponse.toDeviceHolderList(): List<DeviceHolder> {
                         id = holderId,
                         fullName = DtoMapperHelper.getFullName(firstName, lastName),
                         gender = gender.getEnumOrNull<Gender>(),
-                        phoneNumber = phoneNumber,
+                        phoneNumber = getFormattedPhoneNumber(DtoMapperHelper.CountryCode.USA, phoneNumber),
                         imageUrl = imageUrl,
                         stickers = getStickerList(stickers),
                     ),
