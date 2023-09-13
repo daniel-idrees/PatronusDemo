@@ -95,4 +95,8 @@ dependencies {
 
     // Moshi
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+
+    // Google Map
+    implementation 'com.google.maps.android:maps-compose:2.14.0'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
 }
