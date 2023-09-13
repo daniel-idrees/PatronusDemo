@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">PatronusDemo</string>
+
+    <string name="google_maps_key">AIzaSyDCnMPsTphmi9ZbMAxwjJiX5x33ScKbNbw</string>
+
 </resources>
