@@ -1,5 +1,6 @@
 package com.patronusgroup.ui.screens.detail.viewmodel
 
+import androidx.lifecycle.SavedStateHandle
 import com.patronusgroup.domain.model.DeviceHolderDetail
 import com.patronusgroup.domain.usecase.GetDeviceHolderDetailUseCase
 import com.patronusgroup.ui.screens.MainDispatcherRule
@@ -16,21 +17,25 @@ internal class DetailViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
+    private val mockId = "mockId"
+
     private val getDeviceHolderDetailUseCase: GetDeviceHolderDetailUseCase = mock()
+    private val savedStateHandle: SavedStateHandle = mock {
+        whenever(this.mock.get<String>("id")) doReturn mockId
+    }
 
     private val subject = DetailViewModel(
         getDeviceHolderDetailUseCase,
         mainDispatcherRule.testDispatcher,
+        savedStateHandle,
     )
-
-    private val mockId = "mockId"
 
     @Test
     fun `getDetails should return detail if the repository returns detail`() {
         val mockDeviceHolderDetail: DeviceHolderDetail = mock()
         runBlocking {
             whenever(getDeviceHolderDetailUseCase.get(mockId)) doReturn mockDeviceHolderDetail
-            subject.getDetails(mockId)
+            subject.loadData()
             subject.detailUiState.value shouldBe DetailUiState.Success(mockDeviceHolderDetail)
         }
     }
@@ -39,7 +44,7 @@ internal class DetailViewModelTest {
     fun `getDetails should return null if the repository returns null`() {
         runBlocking {
             whenever(getDeviceHolderDetailUseCase.get(mockId)) doReturn null
-            subject.getDetails(mockId)
+            subject.loadData()
             subject.detailUiState.value shouldBe DetailUiState.Error
         }
     }
