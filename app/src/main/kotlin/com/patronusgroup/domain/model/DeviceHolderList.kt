@@ -5,9 +5,10 @@ import com.patronusgroup.domain.model.enums.Sticker
 
 data class DeviceHolder(
     val id: Int,
-    val fullName: String? = null,
-    val gender: Gender? = null,
-    val phoneNumber: String? = null,
-    val imageUrl: String? = null,
-    val stickers: List<Sticker> = listOf(),
+    val fullName: String,
+    val gender: Gender?,
+    val phoneNumber: String,
+    val imageUrl: String?,
+    val stickers: List<Sticker>,
+    val nameInitials: String,
 )

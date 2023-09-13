@@ -26,11 +26,12 @@ class DeviceHolderRepositoryImplTest {
     private val subject = DeviceHolderRepositoryImpl(deviceHolderService)
 
     private val mockId = "123"
-    private val mockFirstName = "firstName"
-    private val mockLastName = "lastName"
+    private val mockFirstName = "FirstName"
+    private val mockLastName = "LastName"
     private val mockUrl = "mockUrl"
     private val mockPhoneNumber = "123-456789"
     private val mockGender = Gender.MALE
+    private val mockNameInitials = "FL"
 
     private val mockLongitude = 22.789
     private val mockLatitude = 22.980
@@ -59,9 +60,10 @@ class DeviceHolderRepositoryImplTest {
             id = mockId.toInt(),
             fullName = "$mockFirstName $mockLastName",
             gender = mockGender,
-            phoneNumber = mockPhoneNumber,
+            phoneNumber = "+1 $mockPhoneNumber",
             imageUrl = mockUrl,
             stickers = listOf(Sticker.FAM, Sticker.BAN),
+            nameInitials = mockNameInitials,
         ),
     )
 
@@ -91,9 +93,9 @@ class DeviceHolderRepositoryImplTest {
         fullName = "$mockFirstName $mockLastName",
         stickers = listOf(Sticker.FAM, Sticker.BAN),
         gender = mockGender,
-        phoneNumber = mockPhoneNumber,
-        addressStreetAndZip = "$mockAddStreet, $mockAddZip",
-        city = mockCity,
+        phoneNumber = "+1 $mockPhoneNumber",
+        fullAddress = "$mockAddStreet, $mockAddZip $mockCity",
+        nameInitials = mockNameInitials,
     )
 
     @Test

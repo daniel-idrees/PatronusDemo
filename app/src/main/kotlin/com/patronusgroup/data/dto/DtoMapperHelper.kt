@@ -25,12 +25,15 @@ object DtoMapperHelper {
         return stickers
     }
 
-    fun getAddressStreetAndZip(address: AddressDto?): String {
+    fun getFullAddress(address: AddressDto?): String {
         address?.let {
             val street = it.street ?: ""
             val zip = it.zip ?: ""
-            val separator = if (street.isNotEmpty() && zip.isNotEmpty()) ", " else ""
-            return "$street$separator$zip"
+            val city = it.city ?: ""
+            val streetZipSeparator =
+                if (street.isNotEmpty() && (zip.isNotEmpty() || city.isNotEmpty())) ", " else ""
+            val zipCitySeparator = if (zip.isNotEmpty() && city.isNotEmpty()) " " else ""
+            return "$street$streetZipSeparator$zip$zipCitySeparator$city"
         } ?: return ""
     }
 
@@ -41,6 +44,12 @@ object DtoMapperHelper {
             val code = countryCode.code
             "$code $phoneNumber"
         }
+    }
+
+    fun getNameInitials(firstName: String?, lastName: String?): String {
+        val firstInitial = firstName?.firstOrNull() ?: ""
+        val secondInitial = lastName?.firstOrNull() ?: ""
+        return "$firstInitial$secondInitial"
     }
 
     enum class CountryCode(val code: String) {

@@ -53,25 +53,36 @@ class DtoMapperHelperTest {
     }
 
     @Test
-    fun testGetAddressStreetAndZip() {
-        `getAddressStreetAndZip should return formatted address`(
+    fun testGetFullAddress() {
+        `getFullAddress should return formatted address`(
             addStreet = "123 Imaginary Street",
             addZip = "45678",
-            expectedAddress = "123 Imaginary Street, 45678",
+            addCity = "Imaginary City",
+            expectedAddress = "123 Imaginary Street, 45678 Imaginary City",
         )
-        `getAddressStreetAndZip should return formatted address`(
+        `getFullAddress should return formatted address`(
             addStreet = null,
             addZip = "45678",
+            addCity = null,
             expectedAddress = "45678",
         )
-        `getAddressStreetAndZip should return formatted address`(
+        `getFullAddress should return formatted address`(
             addStreet = "123 Imaginary Street",
             addZip = null,
-            expectedAddress = "123 Imaginary Street",
+            addCity = "Imaginary City",
+            expectedAddress = "123 Imaginary Street, Imaginary City",
         )
-        `getAddressStreetAndZip should return formatted address`(
+
+        `getFullAddress should return formatted address`(
+            addStreet = null,
+            addZip = "45678",
+            addCity = "Imaginary City",
+            expectedAddress = "45678 Imaginary City",
+        )
+        `getFullAddress should return formatted address`(
             addStreet = null,
             addZip = null,
+            addCity = null,
             expectedAddress = "",
         )
     }
@@ -97,6 +108,33 @@ class DtoMapperHelperTest {
         )
     }
 
+    @Test
+    fun testGetNameInitials() {
+        `getNameInitials should return initials of first and last name`(
+            firstName = "Max",
+            lastName = "Mustermann",
+            expectedInitials = "MM",
+        )
+
+        `getNameInitials should return initials of first and last name`(
+            firstName = null,
+            lastName = "Lustermann",
+            expectedInitials = "L",
+        )
+
+        `getNameInitials should return initials of first and last name`(
+            firstName = "Max",
+            lastName = null,
+            expectedInitials = "M",
+        )
+
+        `getNameInitials should return initials of first and last name`(
+            firstName = null,
+            lastName = null,
+            expectedInitials = "",
+        )
+    }
+
     private fun `getFullName should return full name`(
         firstName: String?,
         lastName: String?,
@@ -114,15 +152,17 @@ class DtoMapperHelperTest {
         result shouldBe expectedList
     }
 
-    private fun `getAddressStreetAndZip should return formatted address`(
+    private fun `getFullAddress should return formatted address`(
         addStreet: String?,
         addZip: String?,
+        addCity: String?,
         expectedAddress: String,
     ) {
-        val result = DtoMapperHelper.getAddressStreetAndZip(
+        val result = DtoMapperHelper.getFullAddress(
             AddressDto(
                 street = addStreet,
                 zip = addZip,
+                city = addCity,
             ),
         )
         result shouldBe expectedAddress
@@ -138,5 +178,14 @@ class DtoMapperHelperTest {
             phoneNumber,
         )
         result shouldBe expectedPhoneNumber
+    }
+
+    private fun `getNameInitials should return initials of first and last name`(
+        firstName: String?,
+        lastName: String?,
+        expectedInitials: String,
+    ) {
+        val result = DtoMapperHelper.getNameInitials(firstName, lastName)
+        result shouldBe expectedInitials
     }
 }

@@ -18,11 +18,12 @@ class GetDeviceHolderListUseCaseTest {
     private val subject = GetDeviceHolderListUseCase(deviceHolderRepository)
 
     private val mockId = "123"
-    private val mockFirstName = "firstName"
-    private val mockLastName = "lastName"
+    private val mockFirstName = "FirstName"
+    private val mockLastName = "LastName"
     private val mockUrl = "mockUrl"
     private val mockPhoneNumber = "123-456789"
     private val mockGender = Gender.MALE
+    private val mockNameInitials = "FL"
 
     private val expectedList = listOf(
         DeviceHolder(
@@ -32,6 +33,7 @@ class GetDeviceHolderListUseCaseTest {
             phoneNumber = mockPhoneNumber,
             imageUrl = mockUrl,
             stickers = listOf(Sticker.FAM, Sticker.BAN),
+            nameInitials = mockNameInitials,
         ),
     )
 

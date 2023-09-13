@@ -2,6 +2,7 @@ package com.patronusgroup.data.dto
 
 import com.patronusgroup.data.dto.DtoMapperHelper.getEnumOrNull
 import com.patronusgroup.data.dto.DtoMapperHelper.getFormattedPhoneNumber
+import com.patronusgroup.data.dto.DtoMapperHelper.getNameInitials
 import com.patronusgroup.data.dto.DtoMapperHelper.getStickerList
 import com.patronusgroup.domain.model.DeviceHolderDetail
 import com.patronusgroup.domain.model.enums.Gender
@@ -31,6 +32,6 @@ fun DeviceHolderDetailResponse.toDeviceHolderDetail(): DeviceHolderDetail =
         stickers = getStickerList(stickers),
         gender = gender.getEnumOrNull<Gender>(),
         phoneNumber = getFormattedPhoneNumber(DtoMapperHelper.CountryCode.USA, phoneNumber),
-        addressStreetAndZip = DtoMapperHelper.getAddressStreetAndZip(address),
-        city = address?.city,
+        fullAddress = DtoMapperHelper.getFullAddress(address),
+        nameInitials = getNameInitials(firstName, lastName),
     )

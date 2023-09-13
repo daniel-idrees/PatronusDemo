@@ -22,9 +22,13 @@ fun DeviceHolderListResponse.toDeviceHolderList(): List<DeviceHolder> {
                         id = holderId,
                         fullName = DtoMapperHelper.getFullName(firstName, lastName),
                         gender = gender.getEnumOrNull<Gender>(),
-                        phoneNumber = getFormattedPhoneNumber(DtoMapperHelper.CountryCode.USA, phoneNumber),
+                        phoneNumber = getFormattedPhoneNumber(
+                            DtoMapperHelper.CountryCode.USA,
+                            phoneNumber,
+                        ),
                         imageUrl = imageUrl,
                         stickers = getStickerList(stickers),
+                        nameInitials = DtoMapperHelper.getNameInitials(firstName, lastName),
                     ),
                 )
             }
