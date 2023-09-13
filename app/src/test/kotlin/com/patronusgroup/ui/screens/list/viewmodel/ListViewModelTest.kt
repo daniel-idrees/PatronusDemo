@@ -28,7 +28,7 @@ class ListViewModelTest {
         val mockDeviceHolderList: List<DeviceHolder> = mock()
         runBlocking {
             whenever(getDeviceHolderListUseCase.get()) doReturn mockDeviceHolderList
-            subject.getList()
+            subject.loadData()
             subject.listUiState.value shouldBe ListUiState.Success(mockDeviceHolderList)
         }
     }
@@ -37,7 +37,7 @@ class ListViewModelTest {
     fun `get should return null if the repository returns null`() {
         runBlocking {
             whenever(getDeviceHolderListUseCase.get()) doReturn null
-            subject.getList()
+            subject.loadData()
             subject.listUiState.value shouldBe ListUiState.Error
         }
     }
