@@ -12,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.patronusgroup.R
 import com.patronusgroup.ui.theme.BodyTextStyle
 
 @Composable
@@ -25,7 +27,7 @@ fun ErrorView(onRetryAction: () -> Unit) {
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
-            text = "Something went wrong ...",
+            text = stringResource(id = R.string.error_text),
             style = BodyTextStyle,
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -36,7 +38,7 @@ fun ErrorView(onRetryAction: () -> Unit) {
             onClick = onRetryAction,
         ) {
             Text(
-                text = "Try Again",
+                text = stringResource(id = R.string.btn_try_again),
                 style = BodyTextStyle,
                 color = Color.White,
                 textAlign = TextAlign.Center,

@@ -16,9 +16,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.patronusgroup.R
 import com.patronusgroup.domain.model.DeviceHolder
 import com.patronusgroup.domain.model.enums.Gender
 import com.patronusgroup.domain.model.enums.Sticker
@@ -28,10 +30,10 @@ import com.patronusgroup.ui.screens.views.DisplayImage
 import com.patronusgroup.ui.screens.views.ErrorView
 import com.patronusgroup.ui.screens.views.LoadingView
 import com.patronusgroup.ui.screens.views.StickersView
+import com.patronusgroup.ui.theme.BodyTextStyle
 import com.patronusgroup.ui.theme.FullNameTextStyle
 import com.patronusgroup.ui.theme.GenderTextStyle
 import com.patronusgroup.ui.theme.HeaderTextStyle
-import com.patronusgroup.ui.theme.BodyTextStyle
 
 @Composable
 fun ListScreenView(
@@ -69,7 +71,7 @@ private fun DeviceHolderListView(
 @Composable
 private fun Header() {
     Text(
-        text = "Device holders",
+        text = stringResource(id = R.string.label_device_holders),
         style = HeaderTextStyle,
     )
 }
