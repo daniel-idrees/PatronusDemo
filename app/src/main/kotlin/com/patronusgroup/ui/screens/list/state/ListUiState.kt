@@ -6,5 +6,4 @@ sealed class ListUiState {
     data class Success(val deviceHolders: List<DeviceHolder>) : ListUiState()
     object Error : ListUiState()
     object Loading : ListUiState()
-    object Empty : ListUiState()
 }

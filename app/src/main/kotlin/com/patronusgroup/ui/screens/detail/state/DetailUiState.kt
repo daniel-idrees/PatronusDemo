@@ -6,5 +6,4 @@ sealed class DetailUiState {
     data class Success(val detail: DeviceHolderDetail) : DetailUiState()
     object Error : DetailUiState()
     object Loading : DetailUiState()
-    object Empty : DetailUiState()
 }
