@@ -4,8 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import com.patronusgroup.domain.model.DeviceHolderDetail
 import com.patronusgroup.domain.usecase.GetDeviceHolderDetailUseCase
 import com.patronusgroup.presentation.common.MainDispatcherRule
+import com.patronusgroup.presentation.detail.state.DetailUiState
 import com.patronusgroup.presentation.detail.viewmodel.DetailViewModel
-import com.patronusgroup.ui.screens.detail.state.DetailUiState
 import io.kotest.common.runBlocking
 import io.kotest.matchers.shouldBe
 import org.junit.Rule

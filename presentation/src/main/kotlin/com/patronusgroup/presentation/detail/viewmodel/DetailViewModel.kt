@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.patronusgroup.core.di.IoDispatcher
 import com.patronusgroup.domain.model.DeviceHolderDetail
 import com.patronusgroup.domain.usecase.GetDeviceHolderDetailUseCase
-import com.patronusgroup.ui.screens.detail.state.DetailUiState
+import com.patronusgroup.presentation.detail.state.DetailUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,8 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val getDeviceHolderDetailUseCase: GetDeviceHolderDetailUseCase,
-    @IoDispatcher
-    private val ioDispatcher: CoroutineDispatcher,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val _detailUiState =

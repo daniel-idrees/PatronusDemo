@@ -1,4 +1,4 @@
-package com.patronusgroup.ui.screens.detail.state
+package com.patronusgroup.presentation.detail.state
 
 import com.patronusgroup.domain.model.DeviceHolderDetail
 

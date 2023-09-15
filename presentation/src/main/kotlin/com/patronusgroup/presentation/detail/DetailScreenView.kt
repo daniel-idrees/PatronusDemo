@@ -55,7 +55,7 @@ import com.patronusgroup.presentation.views.SpacerM
 import com.patronusgroup.presentation.views.SpacerS
 import com.patronusgroup.presentation.views.SpacerXS
 import com.patronusgroup.presentation.views.StickersView
-import com.patronusgroup.ui.screens.detail.state.DetailUiState
+import com.patronusgroup.presentation.detail.state.DetailUiState
 import kotlinx.coroutines.delay
 
 @Composable
