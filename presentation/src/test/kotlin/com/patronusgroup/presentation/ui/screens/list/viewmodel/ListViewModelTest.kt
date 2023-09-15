@@ -2,9 +2,9 @@ package com.patronusgroup.presentation.ui.screens.list.viewmodel
 
 import com.patronusgroup.domain.model.DeviceHolder
 import com.patronusgroup.domain.usecase.GetDeviceHolderListUseCase
+import com.patronusgroup.presentation.common.MainDispatcherRule
 import com.patronusgroup.presentation.list.state.ListUiState
 import com.patronusgroup.presentation.list.viewmodel.ListViewModel
-import com.patronusgroup.presentation.ui.screens.MainDispatcherRule
 import io.kotest.common.runBlocking
 import io.kotest.matchers.shouldBe
 import org.junit.Rule

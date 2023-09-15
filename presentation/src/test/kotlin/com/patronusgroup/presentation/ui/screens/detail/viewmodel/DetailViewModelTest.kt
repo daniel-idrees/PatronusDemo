@@ -3,8 +3,8 @@ package com.patronusgroup.presentation.ui.screens.detail.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import com.patronusgroup.domain.model.DeviceHolderDetail
 import com.patronusgroup.domain.usecase.GetDeviceHolderDetailUseCase
+import com.patronusgroup.presentation.common.MainDispatcherRule
 import com.patronusgroup.presentation.detail.viewmodel.DetailViewModel
-import com.patronusgroup.presentation.ui.screens.MainDispatcherRule
 import com.patronusgroup.ui.screens.detail.state.DetailUiState
 import io.kotest.common.runBlocking
 import io.kotest.matchers.shouldBe
@@ -14,7 +14,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
-internal class DetailViewModelTest {
+class DetailViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
