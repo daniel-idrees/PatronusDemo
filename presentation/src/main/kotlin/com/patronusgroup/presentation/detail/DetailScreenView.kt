@@ -47,6 +47,7 @@ import com.patronusgroup.presentation.style.BodyTextStyle
 import com.patronusgroup.presentation.style.GreyBackground
 import com.patronusgroup.presentation.style.Header2TextStyle
 import com.patronusgroup.presentation.style.HeaderTextStyle
+import com.patronusgroup.presentation.views.DisplayImage
 import com.patronusgroup.presentation.views.ErrorView
 import com.patronusgroup.presentation.views.LoadingView
 import com.patronusgroup.presentation.views.MapShape
@@ -55,20 +56,19 @@ import com.patronusgroup.presentation.views.SpacerS
 import com.patronusgroup.presentation.views.SpacerXS
 import com.patronusgroup.presentation.views.StickersView
 import com.patronusgroup.ui.screens.detail.state.DetailUiState
-import com.patronusgroup.presentation.views.DisplayImage
 import kotlinx.coroutines.delay
 
 @Composable
 fun DetailScreenView(
     viewModel: DetailViewModel,
-    goBack: () -> Unit,
+    goBackToList: () -> Unit,
 ) {
     val viewState by viewModel.detailUiState.collectAsStateWithLifecycle()
     when (viewState) {
         is DetailUiState.Loading -> LoadingView()
         is DetailUiState.Success -> DetailScreen(
             (viewState as DetailUiState.Success).detail,
-            goBack,
+            goBackToList,
         )
 
         else -> ErrorView { viewModel.loadData() }
@@ -78,14 +78,14 @@ fun DetailScreenView(
 @Composable
 private fun DetailScreen(
     detail: DeviceHolderDetail,
-    goBack: () -> Unit,
+    onBackButtonClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp),
     ) {
-        BackButton(goBack)
+        BackButton(onBackButtonClick)
         SpacerS()
         MapWithLocation(detail.latitude, detail.longitude)
         SpacerS()
@@ -102,12 +102,12 @@ private fun DetailScreen(
 }
 
 @Composable
-private fun BackButton(goBack: () -> Unit) {
+private fun BackButton(onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .clip(CircleShape)
             .size(48.dp)
-            .clickable(onClick = goBack)
+            .clickable(onClick = onClick)
             .border(
                 width = 1.dp,
                 color = Color.LightGray,
