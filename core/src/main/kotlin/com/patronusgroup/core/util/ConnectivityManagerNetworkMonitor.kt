@@ -24,7 +24,7 @@ class ConnectivityManagerNetworkMonitor @Inject constructor(
     @ApplicationContext private val context: Context,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : NetworkMonitor {
-    override val isOnline: Flow<Boolean> = callbackFlow {
+    override val isConnected: Flow<Boolean> = callbackFlow {
         val connectivityManager = context.getSystemService<ConnectivityManager>()
         if (connectivityManager == null) {
             channel.trySend(false)
