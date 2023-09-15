@@ -1,5 +1,7 @@
 package com.patronusgroup.presentation.list
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,14 +33,15 @@ import com.patronusgroup.presentation.style.BodyTextStyle
 import com.patronusgroup.presentation.style.FullNameTextStyle
 import com.patronusgroup.presentation.style.GenderTextStyle
 import com.patronusgroup.presentation.style.HeaderTextStyle
+import com.patronusgroup.presentation.views.DisplayImage
 import com.patronusgroup.presentation.views.ErrorView
 import com.patronusgroup.presentation.views.LoadingView
 import com.patronusgroup.presentation.views.StickersView
-import com.patronusgroup.presentation.views.DisplayImage
 
 @Composable
 fun ListScreenView(
     viewModel: ListViewModel,
+    isInternetConnected: Boolean,
     navigateToDetail: (String) -> Unit,
 ) {
     val viewState by viewModel.listUiState.collectAsStateWithLifecycle()
@@ -45,6 +49,7 @@ fun ListScreenView(
         is ListUiState.Loading -> LoadingView()
         is ListUiState.Success -> DeviceHolderListView(
             (viewState as ListUiState.Success).deviceHolders,
+            isInternetConnected,
             navigateToDetail,
         )
 
@@ -55,16 +60,17 @@ fun ListScreenView(
 @Composable
 private fun DeviceHolderListView(
     deviceHolders: List<DeviceHolder>,
+    isInternetConnected: Boolean,
     navigateToDetail: (String) -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 24.dp, top = 24.dp, bottom = 24.dp),
+            .padding(start = 24.dp, top = 24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Header()
-        ListView(deviceHolders, navigateToDetail)
+        ListView(deviceHolders, isInternetConnected, navigateToDetail)
     }
 }
 
@@ -77,22 +83,42 @@ private fun Header() {
 }
 
 @Composable
-private fun ListView(deviceHolders: List<DeviceHolder>, navigateToDetail: (String) -> Unit) {
-    LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        items(deviceHolders) { deviceHolder ->
-            DeviceHolderListItem(deviceHolder) { navigateToDetail(deviceHolder.id.toString()) }
+private fun ListView(
+    deviceHolders: List<DeviceHolder>,
+    isInternetConnected: Boolean,
+    navigateToDetail: (String) -> Unit,
+) {
+    val context = LocalContext.current
+    val onItemClick: (String) -> Unit = { id ->
+        if (isInternetConnected) {
+            navigateToDetail(id)
+        } else {
+            showNoInternetError(context)
         }
     }
+
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        items(deviceHolders) { deviceHolder ->
+            DeviceHolderListItem(
+                deviceHolder,
+                onItemClick = { onItemClick(deviceHolder.id.toString()) },
+            )
+        }
+    }
+}
+
+private fun showNoInternetError(context: Context) {
+    Toast.makeText(context, R.string.internet_error_text, Toast.LENGTH_SHORT).show()
 }
 
 @Composable
 private fun DeviceHolderListItem(
     deviceHolder: DeviceHolder,
-    navigateToDetail: () -> Unit,
+    onItemClick: () -> Unit,
 ) {
     Surface(
         modifier = Modifier
-            .clickable { navigateToDetail() },
+            .clickable(onClick = onItemClick),
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -196,5 +222,6 @@ private fun DeviceHolderListPreview() {
                 nameInitials = "SO",
             ),
         ),
+        true,
     ) {}
 }
