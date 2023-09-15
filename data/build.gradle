@@ -1,0 +1,38 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.android.library'
+apply plugin: 'com.google.dagger.hilt.android'
+
+android {
+    namespace 'com.patronusgroup.data'
+    compileSdk 34
+}
+kapt {
+    correctErrorTypes true
+}
+
+dependencies {
+    implementation project(':domain')
+
+    // dependency injection
+    implementation 'com.google.dagger:hilt-android:2.47'
+    kapt 'com.google.dagger:hilt-compiler:2.48'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    // Moshi
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+    implementation project(path: ':domain')
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.1.0"
+    testImplementation("org.mockito:mockito-core:4.5.1")
+    testImplementation("org.mockito:mockito-inline:4.5.1")
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2"
+    testImplementation "io.kotest:kotest-runner-junit5:5.5.4"
+    testImplementation "io.kotest:kotest-assertions-core:5.5.4"
+    testImplementation "io.kotest:kotest-property:5.5.4"
+}
