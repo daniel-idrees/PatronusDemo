@@ -1,4 +1,4 @@
-package com.patronusgroup.domain.di
+package com.patronusgroup.core.di
 
 import dagger.Module
 import dagger.Provides

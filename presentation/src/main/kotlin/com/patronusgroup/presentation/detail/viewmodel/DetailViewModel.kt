@@ -3,7 +3,7 @@ package com.patronusgroup.presentation.detail.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.patronusgroup.domain.di.IoDispatcher
+import com.patronusgroup.core.di.IoDispatcher
 import com.patronusgroup.domain.model.DeviceHolderDetail
 import com.patronusgroup.domain.usecase.GetDeviceHolderDetailUseCase
 import com.patronusgroup.ui.screens.detail.state.DetailUiState

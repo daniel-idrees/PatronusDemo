@@ -2,7 +2,7 @@ package com.patronusgroup.presentation.list.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.patronusgroup.domain.di.IoDispatcher
+import com.patronusgroup.core.di.IoDispatcher
 import com.patronusgroup.domain.model.DeviceHolder
 import com.patronusgroup.domain.usecase.GetDeviceHolderListUseCase
 import com.patronusgroup.presentation.list.state.ListUiState
