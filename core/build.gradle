@@ -3,7 +3,3 @@ apply from: "$rootDir/gradle/module-common.gradle"
 android {
     namespace 'com.patronusgroup.core'
 }
-
-dependencies {
-    implementation 'androidx.core:core-ktx:1.8.0'
-}
